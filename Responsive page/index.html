@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleFit - Fitness Tracker</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #2ecc71;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 2rem; /* Increased size */
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500; /* Added boldness */
+        }
+        
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 10rem 1rem 6rem; /* Increased padding */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem; /* Larger size */
+            margin-bottom: 1.5rem;
+            font-weight: 800; /* Bolder */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem; /* Larger size */
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #2ecc71;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0.5rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Features */
+        .features {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2ecc71;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #2ecc71;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: #f1f1f1;
+            padding: 5rem 1rem;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial p:first-child {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial p:last-child {
+            font-weight: bold;
+            color: #2ecc71;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2ecc71;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            color: #2ecc71;
+            margin: 1.5rem 0;
+            font-weight: bold;
+        }
+        
+        .pricing-card p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 5rem 1rem;
+            background: #f1f1f1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        footer p {
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: #2ecc71;
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img >
+                <strong>SIMPLEFIT</strong> <!-- Made the name bold and uppercase -->
+            </a>
+            <div class="menu-toggle" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1><strong>TRACK. IMPROVE. SUCCEED.</strong></h1> <!-- Made bold and uppercase -->
+        <p>The simplest way to achieve your fitness goals with our powerful tracking tools</p>
+        <div>
+            <a href="#pricing" class="btn">GET STARTED NOW</a> <!-- Made button text uppercase -->
+            <a href="#features" class="btn btn-outline">LEARN MORE</a> <!-- Made button text uppercase -->
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">OUR POWERFUL FEATURES</h2> <!-- Made title uppercase -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3>WORKOUT TRACKING</h3> <!-- Made uppercase -->
+                <p>Log your exercises and track your progress over time with our intuitive interface.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>NUTRITION LOGGING</h3> <!-- Made uppercase -->
+                <p>Track your meals and monitor your calorie intake with our extensive food database.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>PROGRESS ANALYTICS</h3> <!-- Made uppercase -->
+                <p>Visualize your improvements with easy-to-read charts and detailed statistics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">WHAT OUR USERS SAY</h2> <!-- Made title uppercase -->
+        <div class="testimonial">
+            <p>"SimpleFit helped me lose 20 pounds and keep it off. The easiest fitness app I've ever used! The progress tracking is incredibly motivating."</p>
+            <p>- SARAH J., LOS ANGELES</p> <!-- Made uppercase -->
+        </div>
+        <div class="testimonial">
+            <p>"I love how simple and straightforward this app is. No unnecessary features, just what I need to stay on track with my fitness goals."</p>
+            <p>- MIKE T., NEW YORK</p> <!-- Made uppercase -->
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">SIMPLE PRICING</h2> <!-- Made title uppercase -->
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>BASIC</h3> <!-- Made uppercase -->
+                <div class="price">$9.99/mo</div>
+                <p>Workout Tracking</p>
+                <p>Basic Analytics</p>
+                <p>3 Workout Plans</p>
+                <a href="#" class="btn">CHOOSE PLAN</a> <!-- Made button text uppercase -->
+            </div>
+            <div class="pricing-card" style="border: 2px solid #2ecc71;">
+                <h3>PRO</h3> <!-- Made uppercase -->
+                <div class="price">$19.99/mo</div>
+                <p>All Basic Features</p>
+                <p>Nutrition Tracking</p>
+                <p>Advanced Analytics</p>
+                <p>Unlimited Workout Plans</p>
+                <a href="#" class="btn">CHOOSE PLAN</a> <!-- Made button text uppercase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">GET IN TOUCH</h2> <!-- Made title uppercase -->
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <label for="name">YOUR NAME</label> <!-- Made uppercase -->
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">YOUR EMAIL</label> <!-- Made uppercase -->
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">YOUR MESSAGE</label> <!-- Made uppercase -->
+                    <textarea id="message" required rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">SEND MESSAGE</button> <!-- Made button text uppercase -->
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <strong>SIMPLEFIT</strong>. ALL RIGHTS RESERVED.</p> <!-- Made bold and uppercase -->
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
